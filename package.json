@@ -1,0 +1,18 @@
+{
+  "name": "expense-tracker-app",
+  "version": "1.0.0",
+  "description": "This is a web application to calculate expense and income of a personal to maintain his economy.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "arjun",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2",
+    "express-handlebars": "^6.0.2",
+    "hbs": "^4.2.0",
+    "mongoose": "^6.1.4"
+  }
+}
