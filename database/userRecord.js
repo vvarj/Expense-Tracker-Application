@@ -1,16 +1,10 @@
 const mongoose=require('mongoose');
 
 const userecordSchema=new mongoose.Schema({
-    name:{type:String},
-    totalExpense:{
-        type:Number
-    },
-    totalIncome:{
-        type:Number
-    },
-    
-    addmoney: [Number],
-    purposeuser:[String] , incexp:[Boolean]
+    name:String,
+    addmoney:Number,
+    purposeuser:String, 
+    incexp:String
 
 })
 

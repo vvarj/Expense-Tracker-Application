@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Userrecord=require('../database/userRecord');
-const loginRouter = require('../routes/login');
+
 
 router.post('/', async(req, res) =>{
      
@@ -13,8 +13,12 @@ router.post('/', async(req, res) =>{
         })
    
         try{
+          let loggeduser=req.body.loggeduser;
            await userRecord.save();
+           const duserRecord = await Userrecord.find({name:loggeduser})
+           console.log(duserRecord);
            res.send('data added');
+           
         }
      
     catch(err){
