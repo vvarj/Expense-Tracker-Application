@@ -3,48 +3,44 @@ const router = express.Router();
 const User = require("../database/db");
 
 
-router.get('/', (req, res) =>{
+router.get('/', (req, res) => {
   res.status(200).render('login.hbs');
-  })
+})
 
-router.post('/', async(req, res) =>{
-    try{
 
-        const userName = req.body.username;
-        const password = req.body.password;
+router.post('/', async(req, res) => {
+  try {
 
-        console.log(`${userName} and ${password}`)
-      
-      const duserName=await User.findOne({username:userName})
-      //dusterName is the database object
+    const userName = req.body.username;
+    const password = req.body.password;
 
-      if(duserName!=null){
-        if(password===duserName.password){
-          res.send('LOGIN SUCCESSFUL');
-          console.log(duserName);
+    console.log(`${userName} and ${password}`)
 
-        }else{
-          res.status(400).send('Please Check your password!');
-        }
-        
-      }else{
-        res.status(400).send('invalid User ID');
+    const duserName = await User.findOne({ username: userName });
+    //dusterName is the database object
+
+    if (duserName != null) {
+      if (password === duserName.password) {
+        module.exports ={buddy:userName}
+        res.render('dashboard', { userName });
       }
-      
 
+      else {
+        res.status(400).send('Please Check your password!');
+      }
     }
-    catch(error)
-    {
-      res.status(400).send('invalid id/password');
+    else {
+      res.status(400).send('invalid User ID');
     }
 
+  }
+  catch (error) {
+    res.status(400).send('invalid id/password');
+  }
+})
+
+//login check
 
 
 
-    })
-  
-  //login check
-
-
-  
-  module.exports=router;
+module.exports =router;

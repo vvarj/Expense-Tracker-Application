@@ -16,8 +16,7 @@ router.get('/', (req, res) =>{
                 const registerUser = new User({
                   username:req.body.username,
                   password:req.body.password
-                  
-                })
+})
                 registerUser.save();
                 res.status(200).send("saved");
 

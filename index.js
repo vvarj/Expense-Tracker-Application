@@ -25,12 +25,14 @@ app.set('views',path.join(__dirname,'views'));
 //adding routers
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
+const dashboardRouter = require('./routes/dashboard');
 
 
 
 app.use('/login',loginRouter);
 app.use('/',loginRouter);
 app.use('/register',registerRouter);
+app.use('/dashboard',dashboardRouter);
 
 
 
