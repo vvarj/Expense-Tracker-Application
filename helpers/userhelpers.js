@@ -1,73 +1,60 @@
-const session = require('express-session');
-const Userrecord=require('../database/userRecord');
-const express = require('express');
-const router = express.Router();
-
-module.exports={
-
-    showUsersPortfolio: async (userName)=>{
-        try{
-            const duserRecord = await Userrecord.find({name:userName});
-
-           
-
-        let Incomedatas=[]=duserRecord.filter(n=>n.incexp==='Income');
-        let Expensedatas=[]=duserRecord.filter(n=>n.incexp==='Expense');
-        let IncomeArray=[0,0];
-        let ExpenseArray=[0,0];
+const Userrecord = require("../database/userRecord");
 
 
-        Incomedatas.forEach(i => {
-          IncomeArray.push(i.addmoney);
-          Incomesum=IncomeArray.reduce((a,b)=>a+b,0);
-          console.log(Incomesum);
-      })
+module.exports = {
+  showUsersPortfolio: async (userName) => {
+    try {
+      let duserRecord = await Userrecord.find({name:userName});
 
-      Expensedatas.forEach(i => {
-        ExpenseArray.push(i.addmoney);
-        Expensesum=ExpenseArray.reduce((a,b)=>a+b,0);
-        console.log(Expensesum);
-    })
+     
+      console.log(duserRecord);
+
+      Incomedatas = [] = duserRecord.filter((n) => n.incexp === "Income");
+      Expensedatas = [] = duserRecord.filter((n) => n.incexp === "Expense");
+      IncomeArray = [0, 0];
+      ExpenseArray = [0, 0];
+
+      Incomedatas.forEach((i) => {
+        IncomeArray.push(i.addmoney);
        
-        let totalBal=Incomesum-Expensesum;
-      return [duserRecord,Incomesum,Expensesum,totalBal];
-    
+        //console.log(Incomesum);
+      });
+      
+      Incomesum = IncomeArray.reduce((a, b) => a + b, 0);
+      
+      Expensedatas.forEach((i) => {
+        ExpenseArray.push(i.addmoney);
+      });
 
-         
-        
-        }
-
-        catch(err){
-            return [duserRecord=null,Incomesum=0,Expensesum=0,totalBal=0];
-        }
-        
+      Expensesum =ExpenseArray.reduce((a, b) => a + b, 0);
+      
+      const totalBal = Incomesum - Expensesum;
+      return [duserRecord, Incomesum, Expensesum, totalBal];
+    } 
     
-    
-    
-    },
-
-    
-    addUserData:async (name,purposeuser,addmoney,incexp)=>{
-
-        let userRecord=new Userrecord({
-            name:name,
-            purposeuser:purposeuser,
-            addmoney:addmoney,
-            incexp:incexp
-            })
-            
-            try{
-               await userRecord.save();
-              showUsersPortfolio(userName);
-            }
-         
-        catch(err){
-            return [duserRecord=null,Incomesum=0,Expensesum=0,totalBal=0];
-        }
-    
-        
+    catch (err) {
+      return [
+        (duserRecord = null),
+        (Incomesum = 0),
+        (Expensesum = 0),
+        (totalBal = 0),
+      ];
     }
+  },
 
+  addUserData: async (name, purposeuser, addmoney, incexp) => {
+    let userRecord = new Userrecord({
+      name: name,
+      purposeuser: purposeuser,
+      addmoney: addmoney,
+      incexp: incexp,
+    });
 
-
-}
+    try {
+      await userRecord.save();
+      return "success";
+    } catch (err) {
+      return err;
+    }
+  },
+};

@@ -60,7 +60,7 @@
       <td>{{this.purposeuser}}</td>
       <td>₹{{this.addmoney}}</td>
       <td>{{this.incexp}}</td>
-      <td><a href="dashboard1/delete/{{this.id}}"> X</a></td>
+      <td><a href="./delete/{{this.id}}"> X</a></td>
     </tr>
     {{/each}}
 
@@ -72,7 +72,7 @@
   
     <div class="newtranscation">
       <h3>Add new Transcation</h3>
-     <form method="post" action="/add">
+     <form method="post" action="./add">
      <div class="logged">
      Logged User:<input type="text" id="loggeduser" name="loggeduser" value="{{userName}}" readonly><br>
      </div>
