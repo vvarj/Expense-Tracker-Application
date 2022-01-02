@@ -21,7 +21,7 @@ const store = new MongoDBsession({
 //for session and cookies handling middlewARE
 app.use(
   session({
-    secret: "key that will sign cookie",
+    secret: "key123",
     resave: false,
     saveUninitialized: false,
     store: store,

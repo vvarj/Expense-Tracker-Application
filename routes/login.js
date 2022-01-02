@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const User = require("../database/db");
 const bcrypt=require('bcryptjs');
-var session = require('express-session');
 
 router.get('/', (req, res) => {
 
@@ -50,10 +49,8 @@ router.post('/login', async(req, res) => {
 //login check
 
 router.post('/logout', (req, res) => {
-  req.session.isLoggedIn=false;
   req.session.destroy(err=>{
     console.log(err);
-    
   })
   res.redirect('/');
  })
