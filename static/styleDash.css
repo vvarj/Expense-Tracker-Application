@@ -1,19 +1,13 @@
-.income{
-    color: green;
-}
-.expense{
-    color: red;
-}
 
 .newtranscation{
     margin: 29px auto;
 }
 
 .newtranscation label,input{
-    margin: 12px 5px;
+    margin: 3px 20px;
 }
 .newtranscation input{
-    width: 200px;
+    width: 400px;
 }
 #newnamel{
     padding-right: 15px;
@@ -30,4 +24,12 @@
 .logged{
     display: flexbox;
     float: right;
+}
+
+.container{
+    margin:30px;
+}
+.income-expense{
+
+    margin: 20px 0;
 }

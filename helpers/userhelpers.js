@@ -7,7 +7,7 @@ module.exports = {
       let duserRecord = await Userrecord.find({name:userName});
 
      
-      console.log(duserRecord);
+      //console.log(duserRecord);
 
       Incomedatas = [] = duserRecord.filter((n) => n.incexp === "Income");
       Expensedatas = [] = duserRecord.filter((n) => n.incexp === "Expense");
@@ -40,7 +40,7 @@ module.exports = {
         (totalBal = 0),
       ];
     }
-  },
+  } ,
 
   addUserData: async (name, purposeuser, addmoney, incexp) => {
     let userRecord = new Userrecord({
@@ -52,9 +52,11 @@ module.exports = {
 
     try {
       await userRecord.save();
-      return "success";
+     
+    
     } catch (err) {
       return err;
     }
-  },
+  }
+
 };

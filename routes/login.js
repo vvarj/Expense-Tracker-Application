@@ -2,10 +2,12 @@ const express = require('express');
 const router = express.Router();
 const User = require("../database/db");
 const bcrypt=require('bcryptjs');
-
+var session = require('express-session');
 
 router.get('/', (req, res) => {
-  res.status(200).render('login.hbs');
+
+  res.status(200).render('login.hbs',{"logErr":req.session.loginerror});
+  req.session.loginerror=false;
 })
 
 router.post('/login', async(req, res) => {
@@ -21,19 +23,22 @@ router.post('/login', async(req, res) => {
     if (duserName!=null) {
         const isMatch=await bcrypt.compare(password,duserName.password);
       if(isMatch){
-        req.session.isLoggedIn =true;
+
+        req.session.isLoggedIn=true;
         req.session.user=userName;
 
         await console.log(req.session.isLoggedIn);
         res.render('home.hbs');
       }
       else {
-        res.status(400).send('Please Check your password!');
+        req.session.loginerror=true;
+        res.redirect('/');
       }
     }
 
     else {
-      res.status(400).send('invalid User ID');
+      req.session.loginerror=true;
+      res.redirect('/');
     }
 
   }
@@ -45,7 +50,7 @@ router.post('/login', async(req, res) => {
 //login check
 
 router.post('/logout', (req, res) => {
-  req.session.isLoggedIn =false;
+  req.session.isLoggedIn=false;
   req.session.destroy(err=>{
     console.log(err);
     

@@ -31,6 +31,9 @@
         <div class="textBox">
         <input type="password" name="password" placeholder="password">
          </div>
+         {{#if logErr}}
+         <p class="text-danger">Check Your UserName/ Password</p>
+         {{/if}}
             <input type="submit" value="login" class="btn btn-primary" id="login">
 
             <div class="signup">

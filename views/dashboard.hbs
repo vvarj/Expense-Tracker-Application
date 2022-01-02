@@ -16,30 +16,31 @@
     <title>Dashboard</title>
   </head>
   <body>
-    <h1>Welcome {{userName}}</h1>
+    <nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand col px-md-5">Welcome {{userName}}</a>
+  <form  action="/logout" method="post" class="form-inline">
+    <button class="btn btn-outline-success" type="submit">LOG OUT</button>
+  </form>
+</nav>
+
+
     <div class="container">
-      <div class="heading">
-        <h3>Expense Tracker</h3>
-        <form method="post" action="/logout">
-        <button type="submit">LOG OUT</button>
-        </form>
-        
-      </div>
+  
       <div class="tbalance">
-        <h4>Your Total Balance</h4>
-        <h4>₹{{totalBal}}</h4>
+        <h4>Total Balance</h4>
+        <h4 class="font-weight-bolder">₹{{totalBal}}</h4>
       </div>
    
     <div class="income-expense">
 
       <table style="width:100%">
   <tr>
-    <th class="income">Income</th>
-    <th class="expense">Expense</th>
+    <th class="income text-success fs-4">Income</th>
+    <th class="expense text-danger fs-4">Expense</th>
   </tr>
   <tr>
-    <td>₹{{Incomesum}}</td>
-    <td>₹{{Expensesum}}</td>
+    <td class="income fs-4">₹{{Incomesum}}</td>
+    <td class="expense fs-4">₹{{Expensesum}}</td>
   </tr>
 
 </table>
@@ -47,7 +48,7 @@
 
     <div class="transcation-history">
       <h3>Transcation History</h3>
-    <table style="width:100%">
+    <table class="table table-striped" style="width:100%">
       <tr>
     <th >name</th>
     <th>money</th>
@@ -60,7 +61,8 @@
       <td>{{this.purposeuser}}</td>
       <td>₹{{this.addmoney}}</td>
       <td>{{this.incexp}}</td>
-      <td><a href="./delete/{{this.id}}"> X</a></td>
+      <td><form action="/dashboard/del" method="post"><button type="submit" name="deleteID" value="{{this.id}}"
+       class="btn btn-danger">Delete</button></form></td>
     </tr>
     {{/each}}
 
@@ -72,19 +74,19 @@
   
     <div class="newtranscation">
       <h3>Add new Transcation</h3>
-     <form method="post" action="./add">
+     <form method="post" action="/dashboard/add">
      <div class="logged">
-     Logged User:<input type="text" id="loggeduser" name="loggeduser" value="{{userName}}" readonly><br>
+       <input type="hidden" id="loggeduser" name="loggeduser" value="{{userName}}">
      </div>
     
        <label for="name" id="newnamel">Name</label>
-      <input type="text" id="newname" name="purposeuser"><br>
+      <input type="text" id="newname" name="purposeuser" class="form-control"><br>
 
       <label for="amount" id="newamountl">Amount</label>
-      <input type="number" id="newamount" name="addmoney" min="1" max="999999999999999999999"><br>
+      <input type="number" id="newamount" class="form-control" name="addmoney" min="1" max="999999999999999999999"><br>
 
-      <button type="submit" name="incexp" value="Income">Add Income</button>
-      <button type="submit" name="incexp" value="Expense"> Add Expense</button>
+      <button type="submit" name="incexp" value="Income" class="btn btn-success">Add Income</button>
+      <button type="submit" name="incexp" value="Expense" class="btn btn-danger"> Add Expense</button>
       
 
     </form>
