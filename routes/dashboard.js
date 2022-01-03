@@ -7,9 +7,17 @@ const isAuth = (req, res, next) => {
   if (req.session.user) {
     next();
   } else {
-    req.session.destroy((err) => {});
-    console.log("logged out");
-    res.send("logged out");
+    req.session.destroy((err) => {
+        if(err){
+          res.send('error to destroy session');
+        }
+        else{
+          console.log("logged out");
+          res.send("logged out");
+        }
+
+    });
+   
   }
 };
 

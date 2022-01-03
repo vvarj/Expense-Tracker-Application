@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const path = require("path");
 const port = 3000;
-const hbs = require("hbs");
+//const hbs = require("hbs");
 var session = require("express-session");
 const MongoDBsession = require("connect-mongodb-session")(session);
 //const bcrypt=require('bcryptjs');
@@ -25,6 +25,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: store,
+    cookie:{maxAge:1000*60}
   })
 );
 
